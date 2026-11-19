@@ -17,17 +17,18 @@ CNAME, .nojekyll    GitHub Pages settings for icebergmedia.co
 
 ## The sample ads
 
-Three ads in a row (`.ads-row` in `index.html`), each with its card (platform, title, one line) below it. Video ads
-are upright 9:16; still (feed) ads are 4:5, marked with the `ad-feed` class, and sit centred beside the video so the
-cards line up:
+Three ads in one row (`.ads-row` in `index.html`), with no box around them and no captions. On wider screens they
+are all the same height: the video is upright 9:16, the still (feed) ads are 4:5 (marked with the `ad-feed` class),
+and each column is as wide as its ad's shape needs. They drop into place one after the other (the delays are in
+`site.css`, under `.anim .ads-row`). On phones they stack, centred.
 
 - `outerwear`: a silent video, `assets/ads/outerwear.mp4` (720x1280, H.264, no sound track) with its first frame as the
-  cover, `outerwear.jpg`.
+  cover, `outerwear.jpg`. Its `data-label` is what screen readers say for it.
 - `black-friday` and `boot-fit`: still ads, `assets/ads/black-friday.jpg` and `assets/ads/boot-fit.jpg` (1080x1350).
 
-To swap a still ad: save the new one as a 1080x1350 JPG in `assets/ads/` (strip its metadata), point that slot's
-`<img>` at it with a new `alt` text (what the ad shows), and change its card text. For a 9:16 still, leave out the
-slot's `ad-feed` class.
+To swap a still ad: save the new one as a 1080x1350 JPG in `assets/ads/` (strip its metadata) and point that slot's
+`<img>` at it with a new `alt` text (what the ad shows). For a 9:16 still, leave out the slot's `ad-feed` class and
+change the row's column sizes in `site.css` (`.ads-row`: 0.5625fr for a 9:16 ad, 0.8fr for a 4:5 one).
 
 To swap the video for another one:
 1. Convert it with ffmpeg (`-an` removes the sound, `-map_metadata -1` strips camera details such as location):
@@ -38,6 +39,16 @@ To swap the video for another one:
 
 Videos load when they come near the screen and play muted on a loop while visible. There is no sound button; to give an
 ad one, add `<button class="ad-sound" type="button" aria-label="Turn sound on" hidden></button>` after its `.ad-media` div.
+
+Under the ads, "We run ads on" shows the Instagram, Facebook, TikTok and YouTube logos, faint, in one line (two rows of
+two on small phones). The logo shapes are from Simple Icons (CC0) and are used as they are; only the colour is ours.
+Only add a brand's logo here (or anywhere on the site) if that brand is a client and has said yes.
+
+## How it works
+
+One framed panel of three columns (`.steps`). Each column has its number and title, its white line drawing, then what
+happens and a link to a section of the page. On wider screens the three rows line up across the columns; on phones the
+columns stack inside the frame.
 
 ## The contact form
 

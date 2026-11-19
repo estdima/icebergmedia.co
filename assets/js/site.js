@@ -584,9 +584,9 @@
     { el: '#how', x: 0.5, dy: -40, s: 10, max: 760 },
     { el: '#how', x: 1, dy: 60, dx: -70, s: 30, max: 760 },
     { el: '#how', x: 0, dy: 30, dx: 120, s: 12, max: 760 },
-    { el: '#how .step:nth-child(1) .step-art', x: 1, y: 0.45, dx: -60, s: 24, max: 760 },
-    { el: '#how .step:nth-child(2) .step-art', x: 1, y: 0.3, dx: -110, s: 14, max: 760 },
-    { el: '#how .step:nth-child(3) .step-art', x: 1, y: 0.55, dx: -80, s: 20, max: 760 },
+    { el: '#ads .platforms-label', x: 0, y: 0.3, dx: -60, s: 14, max: 760 },
+    { el: '#how', x: 0.22, y: 1, dy: -46, s: 24, max: 760 },
+    { el: '#how', x: 0.5, y: 1, dy: -20, s: 11, max: 760 },
     { el: '#guarantee', x: 0.8, dy: -50, s: 18, max: 760 },
     { el: '#guarantee .g-seal', x: 1, y: 0.4, dx: 110, s: 34, max: 760 },
     { el: '#guarantee .g-seal', x: 1, y: 0.9, dx: 175, s: 12, max: 760 },
@@ -721,8 +721,7 @@
     figs.forEach((fig) => {
       const media = fig.querySelector('.ad-media');
       const btn = fig.querySelector('.ad-sound');
-      const card = fig.nextElementSibling;
-      const title = card && card.querySelector('.card-title') ? card.querySelector('.card-title').textContent : 'Sample';
+      const label = fig.getAttribute('data-label') || 'Sample video ad';
       const v = document.createElement('video');
       v.muted = true;
       v.defaultMuted = true;
@@ -731,7 +730,7 @@
       v.setAttribute('muted', '');
       v.setAttribute('playsinline', '');
       v.preload = 'none';
-      v.setAttribute('aria-label', title + ' sample ad');
+      v.setAttribute('aria-label', label);
       const poster = fig.getAttribute('data-poster');
       if (poster) {
         v.poster = poster;

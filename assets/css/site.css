@@ -27,9 +27,7 @@
   --ice: #8FD3F4;
   --steel: #3A6F94;
   --panel: #132B3E;
-  --info: #1F4260;
   --line: #2A4A6A;
-  --frame: #5F7587;
   --card: #5F7587;
   --ease: cubic-bezier(0.65, 0, 0.35, 1);
   /* smoothstep ramp into the brand navy, shared by both photos */
@@ -195,14 +193,15 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
 .h2 { margin: 0; font-size: clamp(32px, 4vw, 44px); line-height: 1.1; font-weight: 600; letter-spacing: -0.01em; color: var(--on-dark); }
 .lead { margin: 0; max-width: 620px; font-size: 16px; color: var(--muted); }
 
-/* ad collage: each ad overlaps its info card, zig-zag */
-.collage { position: relative; width: 100%; aspect-ratio: var(--ar, 1.57 / 1); background: var(--panel); border-radius: 16px; }
-.ad { position: absolute; z-index: 2; left: var(--x); top: var(--y); margin: 0; overflow: hidden; box-shadow: 0 18px 32px rgba(12, 34, 50, 0.28); }
-.ad-v { width: 19.3%; aspect-ratio: 9 / 16; border-radius: 22px; border: 5px solid var(--frame); background: #2A4258; }
-.ad-h { width: var(--w, 57.3%); aspect-ratio: 16 / 9; border-radius: 12px; background: #05121C; }
+/* the sample ads: no box and no captions. One row, all the same height: the 9:16 video beside the 4:5 stills
+   (.ad-feed), each column as wide as its ad's shape needs. They fall into place one after the other. */
+.ads-row { display: grid; grid-template-columns: minmax(0, 0.5625fr) minmax(0, 0.8fr) minmax(0, 0.8fr); gap: clamp(16px, 2.8vw, 40px); align-items: start; }
+.ad { position: relative; z-index: 2; width: 100%; margin: 0; overflow: hidden; border-radius: 14px; background: #2A4258; box-shadow: 0 28px 56px rgba(2, 10, 18, 0.45); }
+.ad-v { aspect-ratio: 9 / 16; }
+.ad-feed { aspect-ratio: 4 / 5; }
 .ad-media { position: absolute; inset: 0; }
 .ad.has-video .ad-media { background: #05121C; }
-/* 1px bleed on each side so a fractional frame size never shows a hairline of background at the edge */
+/* 1px bleed on each side so a fractional size never shows a hairline of background at the edge */
 .ad-media video, .ad-media img { position: absolute; left: -1px; top: -1px; display: block; width: calc(100% + 2px); height: calc(100% + 2px); object-fit: cover; }
 .ad:has(.ad-sound) .ad-media video { cursor: pointer; }
 .ad-ph {
@@ -210,9 +209,6 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
   color: var(--muted); font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
   background: radial-gradient(120% 80% at 30% 18%, #36516B 0%, #2A4258 48%, #1B3144 100%);
 }
-.ad-ph-h { color: #D3E9F5; background: radial-gradient(110% 90% at 30% 20%, #10283A 0%, #05121C 70%); padding: 16px; }
-.ad-bar { position: absolute; left: 16px; right: 16px; bottom: 16px; height: 4px; border-radius: 2px; background: #44525F; }
-.ad-bar div { width: 35%; height: 100%; border-radius: 2px; background: var(--ice); }
 .ad-sound {
   position: absolute; right: 10px; bottom: 10px; z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%;
   background: rgba(12, 34, 50, 0.72) center / 18px 18px no-repeat; cursor: pointer;
@@ -223,41 +219,51 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
 .ad.has-sound .ad-sound {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 5 6 9H3v6h3l5 4z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14'/%3E%3C/svg%3E");
 }
-.card {
-  position: absolute; z-index: 1; left: var(--x); top: var(--y); width: var(--w); min-height: var(--h, 25.5%); padding: var(--pad);
-  display: flex; flex-direction: column; justify-content: center; gap: 6px;
-  background: var(--info); border-radius: 12px;
-}
-.card-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--ice); }
-.card-title { font-size: 18px; font-weight: 600; color: var(--on-dark); }
-.card-text { font-size: 14px; line-height: 1.4; color: var(--soft); }
-/* the sample ads: in a row, each with its card below. Video ads are upright 9:16, still (feed) ads 4:5 (.ad-feed).
-   Each item spans the row's two shared rows (subgrid), so a shorter 4:5 ad sits centred beside the video and all
-   the cards line up with equal heights. */
-.ads-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto; column-gap: 32px; row-gap: 18px; padding: 48px clamp(20px, 4%, 56px); background: var(--panel); border-radius: 16px; }
-.ads-item { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 18px; justify-items: center; min-width: 0; }
-.ads-item .ad { position: relative; left: auto; top: auto; width: min(100%, 250px); align-self: center; }
-.ads-item .ad-feed { width: min(100%, 300px); aspect-ratio: 4 / 5; }
-.ads-item .card { position: relative; left: auto; top: auto; width: min(100%, 290px); min-height: 0; padding: 18px 20px; }
+.anim .ads-row .reveal { transform: translateY(-40px); transition: opacity 900ms var(--ease), transform 1100ms var(--ease); }
+.anim .ads-row .reveal.in { transform: none; }
+.anim .ads-row .reveal:nth-child(2):not(.now) { transition-delay: 180ms; }
+.anim .ads-row .reveal:nth-child(3):not(.now) { transition-delay: 360ms; }
 .ads-note { display: flex; gap: 10px; align-items: flex-start; max-width: 700px; margin: -12px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
 .ads-note svg { flex: none; margin-top: 2px; color: var(--ice); }
 .ads-note strong { font-weight: 600; color: var(--soft); }
-
-/* how it works: three open columns split by thin lines, each with a white line drawing of its step */
-.steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 72px; }
-.step { position: relative; display: flex; flex-direction: column; gap: 10px; }
-.step + .step::before { content: ''; position: absolute; top: 0; bottom: 0; left: -36px; border-left: 1px solid rgba(169, 195, 214, 0.18); }
-.step-art { margin-bottom: 22px; }
-.step-art svg { display: block; height: 140px; width: auto; max-width: 100%; }
-.step-n {
-  display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 4px; border-radius: 50%;
-  background: #FFFFFF; color: var(--navy); font-size: 16px; font-weight: 600; line-height: 1;
+/* the platforms we run ads on: a faint row of their logos under a thin line (logo shapes as they are, white) */
+.platforms { display: flex; flex-direction: column; align-items: center; gap: 26px; margin-top: 16px; padding-top: 56px; border-top: 1px solid rgba(169, 195, 214, 0.14); }
+.platforms-label { margin: 0; }
+.platforms-row {
+  margin: 0; padding: 0; list-style: none; display: flex; align-items: center; justify-content: center; gap: 20px clamp(40px, 6vw, 88px);
+  color: #FFFFFF; opacity: 0.55;
 }
-.step h3 { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 600; color: var(--on-dark); }
-.step p { margin: 0; max-width: 340px; color: var(--muted); }
-/* the columns rise one after another */
-.anim .steps .reveal:nth-child(2):not(.now) { transition-delay: 140ms; }
-.anim .steps .reveal:nth-child(3):not(.now) { transition-delay: 280ms; }
+.platforms-row li { display: flex; align-items: center; gap: 11px; font-size: 21px; font-weight: 600; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+.platforms-row svg { display: block; flex: none; width: 24px; height: 24px; fill: currentColor; }
+
+/* how it works: one framed panel of three columns split by thin lines. Each column: number and title on top, the
+   step's line drawing in the middle, what happens and a link at the bottom. Rows line up across the columns. */
+.steps {
+  margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto 1fr auto;
+  border: 1px solid rgba(169, 195, 214, 0.22); border-radius: 24px; background: rgba(255, 255, 255, 0.015);
+}
+.step { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 28px; min-width: 0; padding: 36px 36px 34px; }
+.step + .step { border-left: 1px solid rgba(169, 195, 214, 0.22); }
+.step-top { display: flex; align-items: center; gap: 14px; }
+.step-n {
+  display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 50%;
+  background: #FFFFFF; color: var(--navy); font-size: 15px; font-weight: 600; line-height: 1;
+}
+.step h3 { margin: 0; font-size: 21px; line-height: 1.25; font-weight: 600; color: var(--on-dark); }
+.step-art { display: grid; place-items: center; min-height: 190px; }
+.step-art svg { display: block; height: 150px; width: auto; max-width: 100%; }
+.step-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.step p { margin: 0; max-width: 340px; font-size: 17px; line-height: 1.5; color: var(--soft); }
+.step-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--on-dark); text-decoration: none; transition: color 350ms var(--ease); }
+.step-link svg { transition: transform 350ms var(--ease); }
+.step-link:hover { color: var(--ice); }
+.step-link:hover svg { transform: translateX(4px); }
+/* the frame rises in, then its columns fill in one after another (a fade only, so the lines stay put) */
+.anim .steps .step.reveal { transform: none; transition: opacity 900ms var(--ease); }
+.anim .steps .step.reveal:nth-child(1):not(.now) { transition-delay: 200ms; }
+.anim .steps .step.reveal:nth-child(2):not(.now) { transition-delay: 380ms; }
+.anim .steps .step.reveal:nth-child(3):not(.now) { transition-delay: 560ms; }
+.anim .steps .step.reveal.now { transition: none; }
 
 /* guarantee: the promise beside a white seal, between two thin lines */
 .guarantee {
@@ -401,22 +407,20 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
   .brand img { height: 32px; }
   .header-actions { gap: 14px; }
   .dive-scene { left: clamp(100vw + 12px - var(--s), 50vw - 0.655 * var(--s), -12px); }
-  .collage { aspect-ratio: auto; display: flex; flex-direction: column; gap: 12px; padding: 16px; }
-  .collage > .ad, .collage > .card { position: relative; left: auto; top: auto; width: 100%; height: auto; min-height: 0; }
-  .collage > .card { padding: 20px; }
-  .collage > .ad-v { max-width: 260px; align-self: center; }
-  .ads-row { grid-template-columns: 1fr; grid-template-rows: none; gap: 28px; padding: 20px 16px; }
-  .ads-item { grid-row: auto; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-  .ads-item .ad { width: min(100%, 260px); }
-  .ads-item .ad-feed { width: min(100%, 300px); }
-  .ads-item .card { width: 100%; }
-  .steps { grid-template-columns: 1fr; gap: 0; }
-  .step { padding: 36px 0; }
-  .step:first-child { padding-top: 4px; }
-  .step:last-child { padding-bottom: 0; }
-  .step + .step::before { left: 0; right: 0; bottom: auto; border-left: 0; border-top: 1px solid rgba(169, 195, 214, 0.18); }
-  .step-art { margin-bottom: 18px; }
+  .ads-row { grid-template-columns: minmax(0, 1fr); gap: 28px; justify-items: center; }
+  .ads-row .ad-v { width: min(100%, 300px); }
+  .ads-row .ad-feed { width: min(100%, 340px); }
+  .anim .ads-row .reveal:nth-child(n):not(.now) { transition-delay: 0ms; }
+  .platforms { gap: 22px; margin-top: 8px; padding-top: 44px; }
+  .platforms-row { gap: 20px 36px; }
+  .platforms-row li { gap: 9px; font-size: 18px; }
+  .platforms-row svg { width: 21px; height: 21px; }
+  .steps { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; border-radius: 20px; }
+  .step { grid-row: auto; display: flex; flex-direction: column; gap: 22px; padding: 28px 24px; }
+  .step + .step { border-left: 0; border-top: 1px solid rgba(169, 195, 214, 0.22); }
+  .step-art { min-height: 0; }
   .step-art svg { height: 120px; }
+  .anim .steps .step.reveal:nth-child(n):not(.now) { transition-delay: 0ms; }
   .guarantee { grid-template-columns: 1fr; gap: 28px; padding: 48px 0; }
   .g-seal { width: 128px; }
   .contact-space { display: none; }
@@ -426,6 +430,11 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
   .contact-cap { background-size: 166.67% 100%; background-position: 28% 0; }
   .contact-card { padding: 28px 22px; }
   .footer-in { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- small phones: the platform logos in two rows of two ---------- */
+@media (max-width: 560px) {
+  .platforms-row { display: grid; grid-template-columns: repeat(2, max-content); gap: 20px 44px; }
 }
 
 /* ---------- phones with the two-row header: the headline starts clear of it ---------- */
