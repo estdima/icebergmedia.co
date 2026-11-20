@@ -12,6 +12,7 @@ assets/img/         logos, the two iceberg photos (WebP + JPG in several sizes) 
 assets/fonts/       Outfit, self-hosted
 assets/ads/         the sample ads (video + cover frame, still images)
 og-image.jpg        the preview image shown when the link is shared
+favicon.*, icon-*   the site icon for browser tabs, Google and phones (favicon.ico is for tools that only look there)
 CNAME, .nojekyll    GitHub Pages settings for icebergmedia.co
 ```
 
