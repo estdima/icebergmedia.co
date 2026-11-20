@@ -12,7 +12,7 @@ assets/img/         logos, the two iceberg photos (WebP + JPG in several sizes) 
 assets/fonts/       Outfit, self-hosted
 assets/ads/         the sample ads (video + cover frame, still images)
 og-image.jpg        the preview image shown when the link is shared
-favicon.*, icon-*   the site icon for browser tabs, Google and phones (favicon.ico is for tools that only look there)
+favicon.*, icon-*   the site icon for browser tabs, Google and phones. Google only takes icons in multiples of 48px (or SVG), so keep every linked icon at 48, 96, 192... (favicon.ico is for tools that only look there)
 CNAME, .nojekyll    GitHub Pages settings for icebergmedia.co
 ```
 
