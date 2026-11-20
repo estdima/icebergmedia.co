@@ -302,6 +302,9 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
 /* ---------- 6. contact: back up to the surface ---------- */
 .contact {
   position: relative; display: flex; flex-direction: column; overflow: hidden;
+  /* starts 1px early, over the end of the deep part (both are #567186 there), so the join can't show a hairline of
+     the navy page: Safari on iPhone drew one where the two met at a fraction of a pixel. The footer does the same. */
+  margin-top: -1px;
   background-color: #A3C1DA;
   background-image: linear-gradient(to bottom, #567186 0px, #637E94 44px, #718CA3 88px, #7D9AB1 131px, #89A6BE 175px, #93B1CA 219px, #9CBAD3 262px, #A1BFD8 306px, #A3C1DA 350px);
   background-repeat: no-repeat;
