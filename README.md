@@ -41,9 +41,10 @@ To swap the video for another one:
 Videos load when they come near the screen and play muted on a loop while visible. There is no sound button; to give an
 ad one, add `<button class="ad-sound" type="button" aria-label="Turn sound on" hidden></button>` after its `.ad-media` div.
 
-Under the ads, "We run ads on" shows the Instagram, Facebook, TikTok and YouTube logos, faint, in one line (two rows of
-two on small phones). The logo shapes are from Simple Icons (CC0) and are used as they are; only the colour is ours.
-Only add a brand's logo here (or anywhere on the site) if that brand is a client and has said yes.
+Under the ads, "Run Ads like all the big brands" shows the Mammut, The North Face, Arc'teryx, Nike and Adidas logos,
+faint, in one line (wrapping on phones). They are shown as examples of big brands, not as clients. Each file in
+assets/img/brands/ is the brand's own logo shape, painted white and cropped tight; the heights in site.css (.b-mammut and
+so on) make them look the same size.
 
 ## How it works
 

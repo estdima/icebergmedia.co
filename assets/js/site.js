@@ -584,7 +584,7 @@
     { el: '#how', x: 0.5, dy: -40, s: 10, max: 760 },
     { el: '#how', x: 1, dy: 60, dx: -70, s: 30, max: 760 },
     { el: '#how', x: 0, dy: 30, dx: 120, s: 12, max: 760 },
-    { el: '#ads .platforms-label', x: 0, y: 0.3, dx: -60, s: 14, max: 760 },
+    { el: '#ads .brands', x: 0, y: 0, dx: 26, dy: 22, s: 14, max: 760 },
     { el: '#how', x: 0.22, y: 1, dy: -46, s: 24, max: 760 },
     { el: '#how', x: 0.5, y: 1, dy: -20, s: 11, max: 760 },
     { el: '#guarantee', x: 0.8, dy: -50, s: 18, max: 760 },

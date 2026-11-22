@@ -226,15 +226,20 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
 .ads-note { display: flex; gap: 10px; align-items: flex-start; max-width: 700px; margin: -12px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
 .ads-note svg { flex: none; margin-top: 2px; color: var(--ice); }
 .ads-note strong { font-weight: 600; color: var(--soft); }
-/* the platforms we run ads on: a faint row of their logos under a thin line (logo shapes as they are, white) */
-.platforms { display: flex; flex-direction: column; align-items: center; gap: 26px; margin-top: 16px; padding-top: 56px; border-top: 1px solid rgba(169, 195, 214, 0.14); }
-.platforms-label { margin: 0; }
-.platforms-row {
-  margin: 0; padding: 0; list-style: none; display: flex; align-items: center; justify-content: center; gap: 20px clamp(40px, 6vw, 88px);
-  color: #FFFFFF; opacity: 0.55;
+/* "Run Ads like all the big brands": a faint row of well-known brands' logos under a thin line (each brand's own
+   logo shape, white). Heights differ so they look the same size: wide wordmarks lower, compact marks taller. */
+.brands { display: flex; flex-direction: column; align-items: center; gap: 30px; margin-top: 16px; padding-top: 56px; border-top: 1px solid rgba(169, 195, 214, 0.14); }
+.brands-label { margin: 0; text-align: center; }
+.brands-row {
+  margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 28px clamp(40px, 5.5vw, 80px); opacity: 0.55;
 }
-.platforms-row li { display: flex; align-items: center; gap: 11px; font-size: 21px; font-weight: 600; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
-.platforms-row svg { display: block; flex: none; width: 24px; height: 24px; fill: currentColor; }
+.brands-row img { display: block; width: auto; }
+.b-mammut { height: 16px; }
+.b-tnf { height: 34px; }
+.b-arcteryx { height: 20px; }
+.b-nike { height: 29px; }
+.b-adidas { height: 39px; }
 
 /* how it works: one framed panel of three columns split by thin lines. Each column: number and title on top, the
    step's line drawing in the middle, what happens and a link at the bottom. Rows line up across the columns. */
@@ -424,10 +429,13 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
   .ads-row .ad-v { width: min(100%, 300px); }
   .ads-row .ad-feed { width: min(100%, 340px); }
   .anim .ads-row .reveal:nth-child(n):not(.now) { transition-delay: 0ms; }
-  .platforms { gap: 22px; margin-top: 8px; padding-top: 44px; }
-  .platforms-row { gap: 20px 36px; }
-  .platforms-row li { gap: 9px; font-size: 18px; }
-  .platforms-row svg { width: 21px; height: 21px; }
+  .brands { gap: 26px; margin-top: 8px; padding-top: 44px; }
+  .brands-row { gap: 26px 36px; }
+  .b-mammut { height: 14px; }
+  .b-tnf { height: 30px; }
+  .b-arcteryx { height: 18px; }
+  .b-nike { height: 25px; }
+  .b-adidas { height: 34px; }
   .steps { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; border-radius: 20px; }
   .step { grid-row: auto; display: flex; flex-direction: column; gap: 22px; padding: 28px 24px; }
   .step + .step { border-left: 0; border-top: 1px solid rgba(169, 195, 214, 0.22); }
@@ -441,11 +449,6 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
   .contact-cap { background-size: 166.67% 100%; background-position: 28% 0; }
   .contact-card { padding: 28px 22px; }
   .footer-in { flex-direction: column; align-items: flex-start; }
-}
-
-/* ---------- small phones: the platform logos in two rows of two ---------- */
-@media (max-width: 560px) {
-  .platforms-row { display: grid; grid-template-columns: repeat(2, max-content); gap: 20px 44px; }
 }
 
 /* ---------- phones with the two-row header: the headline starts clear of it ---------- */
