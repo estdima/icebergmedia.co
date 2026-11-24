@@ -257,7 +257,8 @@ html:not(.anim) .dive-line, html:not(.anim) .scroll-hint { display: none; }
 .step h3 { margin: 0; font-size: 21px; line-height: 1.25; font-weight: 600; color: var(--on-dark); }
 .step-art { display: grid; place-items: center; min-height: 190px; }
 .step-art svg { display: block; height: 150px; width: auto; max-width: 100%; }
-.step-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+/* the link sits at the bottom of the row, so the three links line up even when one step's text runs a line longer */
+.step-foot { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 18px; }
 .step p { margin: 0; max-width: 340px; font-size: 17px; line-height: 1.5; color: var(--soft); }
 .step-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--on-dark); text-decoration: none; transition: color 350ms var(--ease); }
 .step-link svg { transition: transform 350ms var(--ease); }
