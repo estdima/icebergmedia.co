@@ -876,7 +876,7 @@
       p1.textContent = "We've got your details and will reply within 60 minutes.";
       const p2 = document.createElement('p');
       p2.className = 'thanks-note';
-      p2.textContent = "We've also sent a confirmation to " + email + '.';
+      p2.textContent = "We've also sent a confirmation to " + email + '. Not there? Check your spam folder.';
       box.append(h, p1, p2);
       form.replaceWith(box);
       box.focus({ preventScroll: true });
